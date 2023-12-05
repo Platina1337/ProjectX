@@ -1,0 +1,78 @@
+
+{% load static %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль пользователя</title>
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{% url 'main' %}">Главная</a></li>
+        <li><a href="{% url 'profile' %}">Профиль</a></li>
+        <li><a href="{% url 'registration' %}">Выйти</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="profile-container">
+      <h1>Профиль пользователя</h1>
+      <div class="profile-details">
+        <img src="user_avatar.jpg" alt="User Avatar">
+          <div class="form-group">
+          <label for="photo">Фотография:</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+        <h2>Имя пользователя</h2>
+        <p>Email: user@example.com</p>
+        <p>Дата рождения: 01.01.1990</p>
+        <p>Город: Город</p>
+        <!-- Другие детали профиля -->
+      </div>
+    </div>
+
+    <!-- Форма для редактирования профиля -->
+    <div class="edit-profile-form">
+      <h2>Редактировать профиль</h2>
+      <form action="/edit-profile" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+      <label for="username">Имя пользователя:</label>
+      <input type="text" id="username" name="username" value="" placeholder="Текущее имя" required onfocus="clearText(this)">
+    </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="" placeholder="Email" required onfocus="clearText(this)">
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Дата рождения:</label>
+          <input type="date" id="birthdate" name="birthdate" value="1990-01-01" required>
+        </div>
+        <div class="form-group">
+          <label for="city">Город:</label>
+          <input type="text" id="city" name="city" value="" placeholder="Город" required onfocus="clearText(this)">
+        </div>
+<!--          <div class="form-group">-->
+<!--          <label for="photo">Фотография:</label>-->
+<!--          <input type="file" id="photo" name="photo" accept="image/*">-->
+<!--        </div>-->
+        <button type="submit">Сохранить</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Your Website</p>
+  </footer>
+</body>
+</html>
+
+{% endblock %}
+
