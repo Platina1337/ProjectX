@@ -1,10 +1,11 @@
 from django.views.generic import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic import FormView, UpdateView
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import AddPostModel
+from .forms import AddPostModel, ProfileForm
+from django.contrib import messages
 
 
 
@@ -55,11 +56,21 @@ class BaseView(TemplateView):
 
 
 
-class ProfileView(TemplateView):
+class ProfileView(UpdateView):
     template_name = 'luckych/profile.html'
+    form_class = ProfileForm
 
-    # def edit_profile(self, request):
-    #     if request.method == 'POST':
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def form_valid(self, form):
+        messages.success(self.request, f'Ваш профиль обновлен')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, f'Ваш профиль не обновлен')
+        return super().form_invalid(form)
+
 
 def logout_user(reqest):
     logout(reqest)

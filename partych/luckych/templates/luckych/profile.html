@@ -41,23 +41,23 @@
     <!-- Форма для редактирования профиля -->
     <div class="edit-profile-form">
       <h2>Редактировать профиль</h2>
-      <form action="/edit-profile" method="POST">
+      <form action="/profile/" method="POST">
         {% csrf_token %}
         <div class="form-group">
-      <label for="username">Имя пользователя:</label>
-      <input type="text" id="username" name="username" value="" placeholder="Текущее имя" required onfocus="clearText(this)">
+      <label for="name">Имя пользователя:</label>
+      <input type="text" id="name" name="username" value="{{form.name.value|default:""}}" placeholder="Текущее имя" required onfocus="clearText(this)">
     </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" value="" placeholder="Email" required onfocus="clearText(this)">
+          <input type="email" id="email" name="email" value="{{form.email.value|default:""}}" placeholder="Email" required onfocus="clearText(this)">
         </div>
         <div class="form-group">
           <label for="birthdate">Дата рождения:</label>
-          <input type="date" id="birthdate" name="birthdate" value="1990-01-01" required>
+          <input type="date" id="birthdate" name="birthdate" value="{{form.date.value|default:""}}" required>
         </div>
         <div class="form-group">
           <label for="city">Город:</label>
-          <input type="text" id="city" name="city" value="" placeholder="Город" required onfocus="clearText(this)">
+          <input type="text" id="city" name="city" value="{{form.city.value|default:""}}" placeholder="Город" required onfocus="clearText(this)">
         </div>
 <!--          <div class="form-group">-->
 <!--          <label for="photo">Фотография:</label>-->

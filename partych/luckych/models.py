@@ -6,8 +6,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.PROTECT)
     name = models.CharField(max_length=128, null=True)
     email = models.CharField(max_length=128, null=True)
-    date = models.DateField(auto_now_add=True, null=True)
-    image = models.ImageField(upload_to='media/')
+    date = models.DateField( null=True)
+    image = models.ImageField(null=True, upload_to='media/')
     city = models.CharField(max_length=128, null=True)
 
     def __str__(self):
