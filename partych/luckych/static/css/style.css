@@ -72,7 +72,14 @@ p a {
 .form-container {
     margin-top: 50px;
 }
-
-
+.big_penis {
+  color: var(--color_gay) !important;
+}
+:root {
+    --color_gay: #6a6a6a;
+}
+.tag{
+    background-color: #ffffff important;
+}
 
 

@@ -9,5 +9,23 @@
     background-size: cover;
     }
 </style>
+{% for post in Appoint %}
+    <div class="container tag">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                        {{ post.title }}
+                    </button>
+                </h2>
+                <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>{{ post.description }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
 
 {% endblock %}

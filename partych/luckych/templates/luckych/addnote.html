@@ -5,7 +5,7 @@
         <form action="{% url 'add_note' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Добавить</button>
+            <button type="submit" formaction="{% url 'main' %}">Добавить</button>
         </form>
 {% endblock %}
 

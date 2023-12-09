@@ -1,11 +1,16 @@
-from django.views.generic import TemplateView
+import logging
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView
 from django.views.generic import FormView, UpdateView
 from django.contrib.auth.models import User
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AddPostModel, ProfileForm
 from django.contrib import messages
+from .models import *
 
 
 
@@ -46,10 +51,9 @@ class RegView(TemplateView):
 
 
 
-class MainView(TemplateView):
-    template_name = 'luckych/main.html'
-
-
+def main(request):
+    Appoint = AppointMeeting.objects.filter()
+    return render(request, 'luckych/main.html', locals())
 
 class BaseView(TemplateView):
     template_name = 'luckych/base.html'
@@ -64,9 +68,12 @@ class ProfileView(UpdateView):
         return self.request.user.profile
 
     def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user  # Присваиваем текущего пользователя
+        instance.save()
+
         messages.success(self.request, f'Ваш профиль обновлен')
         return super().form_valid(form)
-
     def form_invalid(self, form):
         messages.error(self.request, f'Ваш профиль не обновлен')
         return super().form_invalid(form)
@@ -77,11 +84,22 @@ def logout_user(reqest):
     return redirect('login')
 
 
-class AddNoteView(FormView):
+
+
+
+
+logger = logging.getLogger(__name__)
+
+class AddNoteView(LoginRequiredMixin, CreateView):
+    model = AppointMeeting
+    fields = ['title', 'description']
     template_name = 'luckych/addnote.html'
-    form_class = AddPostModel
-    # success_url =
 
     def form_valid(self, form):
-        form.save()
+        form.instance.author = self.request.user
+        logger.debug(form.cleaned_data)  # Логгирование информации
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)

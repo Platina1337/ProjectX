@@ -15,13 +15,13 @@ class Profile(models.Model):
 
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=128, verbose_name='Название Категории')
+# class Category(models.Model):
+#     name = models.CharField(max_length=128, verbose_name='Название Категории')
 
 class AppointMeeting(models.Model):
     title = models.CharField(max_length=128, null=True, verbose_name='Заголовок')
     description = models.TextField(max_length=256, null=True, verbose_name='Описание')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
+    # category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
 
     def __str__(self):
         return self.title
