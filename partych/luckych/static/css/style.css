@@ -81,5 +81,22 @@ p a {
 .tag{
     background-color: #ffffff important;
 }
+.img-content {
+  /* height: 400px; */
+  max-width: 80%;
+  margin-right: 16px;
+  overflow:hidden;
+}
+.accordion-body {
+overflow:hidden;
+  hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphenate-limit-chars: 6 3 2;
 
+}
+.bg-red {
+background:red;
+}
 

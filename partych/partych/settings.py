@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-j&#=64+h=4!(%7%7col+o7kw5nm-p@4g#as&^zz@nxezr7035d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -80,14 +81,11 @@ WSGI_APPLICATION = 'partych.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': 'projectx',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation

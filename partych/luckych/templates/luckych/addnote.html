@@ -2,10 +2,24 @@
 {% load static %}
 
 {% block content %}
-        <form action="{% url 'add_note' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" formaction="{% url 'main' %}">Добавить</button>
-        </form>
+  <div class="container">
+    <h2 class="my-4">Добавление поста</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_title">Заголовок:</label>
+        {{ form.title }}
+      </div>
+      <div class="form-group">
+        <label for="id_description">Описание:</label>
+        {{ form.description }}
+      </div>
+      <div class="form-group">
+        <label for="id_category">Категория:</label>
+        {{ form.category }}
+      </div>
+      <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+  </div>
 {% endblock %}
 

@@ -5,9 +5,11 @@ from .models import *
 class AddPostModel(forms.ModelForm):
     class Meta:
         model = AppointMeeting
-        fields = '__all__'
+        fields = ['title', 'description', 'category']
 
-
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['category'].queryset = Category.objects.all()
 
 class ProfileForm(forms.ModelForm):
     class Meta:

@@ -4,9 +4,9 @@
 
 {% block content %}
 <style>
-    body{
-    background-image: url('{% static "img/party.jpg" %}');
-    background-size: cover;
+    body {
+        background-image: url('{% static "img/party.jpg" %}');
+        background-size: cover;
     }
 </style>
 {% for post in Appoint %}
@@ -21,6 +21,12 @@
                 <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <strong>{{ post.description }}</strong>
+                        <br>
+                        <strong>Категория: {{ post.category }}</strong>
+                        <br>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete_post' post.id %}">Удалить</a>
+
+
                     </div>
                 </div>
             </div>
@@ -28,4 +34,37 @@
     </div>
 {% endfor %}
 
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Получаем CSRF-токен-->
+<!--        const csrftoken = $('input[name="csrfmiddlewaretoken"]').val();-->
+
+<!--        $(".delete-post").click(function () {-->
+<!--            let postId = $(this).data("post-id");-->
+
+<!--            // Добавляем CSRF-токен в настройки AJAX-запроса-->
+<!--            $.ajaxSetup({-->
+<!--                beforeSend: function (xhr, settings) {-->
+<!--                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {-->
+<!--                        xhr.setRequestHeader("X-CSRFToken", csrftoken);-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+
+<!--            $.ajax({-->
+<!--                url: "/delete_post/" + postId + "/",-->
+<!--                type: "DELETE",-->
+<!--                success: function (response) {-->
+<!--                    location.reload();-->
+<!--                },-->
+<!--                error: function (xhr) {-->
+<!--                    console.log(xhr.responseText);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
 {% endblock %}
+

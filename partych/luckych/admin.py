@@ -16,3 +16,7 @@ class Appoint(admin.ModelAdmin):
     list_display = [field.name for field in AppointMeeting._meta.fields]
 
 admin.site.register(AppointMeeting, Appoint)
+class Cat(admin.ModelAdmin):
+    list_display = [field.name for field in Category._meta.fields]
+
+admin.site.register(Category, Cat)
